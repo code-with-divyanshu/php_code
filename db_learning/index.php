@@ -1,11 +1,27 @@
 <?php
 include("database.php");
 
-if ($conn) {
-    echo "You are Connected!";
-} else {
-    echo "Couldn't Connect!";
+$username = "Karan";
+$password = "123456";
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
+$sql = "INSERT INTO users (user, password)
+        VALUES ('$username', '$hash')";
+try {
+    mysqli_query($conn, $sql);
+    echo "User is now registered";
+} catch (mysqli_sql_exception) {
+    echo "Could not register User";
 }
+
+mysqli_close($conn);
+
+
+// if ($conn) {
+//     echo "You are Connected!";
+// } else {
+//     echo "Couldn't Connect!";
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
