@@ -1,18 +1,55 @@
 <?php
 include("database.php");
+$conn = mysqli_connect($db_server, $db_user,  $db_password, $db_name);
 
-$username = "Karan";
-$password = "123456";
-$hash = password_hash($password, PASSWORD_DEFAULT);
 
-$sql = "INSERT INTO users (user, password)
-        VALUES ('$username', '$hash')";
-try {
-    mysqli_query($conn, $sql);
-    echo "User is now registered";
-} catch (mysqli_sql_exception) {
-    echo "Could not register User";
+// Create Table in Database Query
+
+// $username = "Karan";
+// $password = "123456";
+// $hash = password_hash($password, PASSWORD_DEFAULT);
+
+// $sql = "INSERT INTO users (user, password)
+//         VALUES ('$username', '$hash')";
+// try {
+//     mysqli_query($conn, $sql);
+//     echo "User is now registered";
+// } catch (mysqli_sql_exception) {
+//     echo "Could not register User";
+// }
+
+// query MySQL database to get one detail
+
+// $sql = "SELECT * FROM users WHERE user = 'Karan'";
+
+// $result = mysqli_query($conn, $sql);
+
+// if (mysqli_num_rows($result) > 0) {
+//     $row = mysqli_fetch_assoc($result);
+//     echo $row["id"] . "<br>";
+//     echo $row["user"] . "<br>";
+//     echo $row["reg_date"] . "<br>";
+// } else {
+//     echo "No User Found";
+// }
+
+// query MySQL database to get all details
+
+$sql = "SELECT * FROM users";
+
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo $row["id"] . "<br>";
+        echo $row["user"] . "<br>";
+        echo $row["reg_date"] . "<br>";
+    }
+} else {
+    echo "No User Found";
 }
+
+
 
 mysqli_close($conn);
 
@@ -33,7 +70,7 @@ mysqli_close($conn);
 </head>
 
 <body>
-    Hello <br>
+    <!-- Hello <br> -->
 </body>
 
 </html>
